@@ -1,9 +1,7 @@
 import React, { useEffect, useMemo, useState, useRef } from "react";
-
 function uid() {
   return crypto?.randomUUID?.() ?? String(Date.now() + Math.random());
 }
-
 function shuffle(array) {
   const copy = [...array];
   for (let i = copy.length - 1; i > 0; i--) {
@@ -16,12 +14,11 @@ function shuffle(array) {
 export default function App() {
   // Updated CONFIG - Longer times
   const CONFIG = {
-    NORMAL: { start: 45000, color: "#10b981", name: "NORMAL" },    // 45s
-    ADVENTURE: { start: 30000, color: "#f59e0b", name: "ADVENTURE" }, // 30s
-    HELL: { start: 10000, color: "#ef4444", name: "HELL" }         // 10s
+    NORMAL: { start: 45000, color: "#10b981", name: "NORMAL" },    
+    ADVENTURE: { start: 30000, color: "#f59e0b", name: "ADVENTURE" }, 
+    HELL: { start: 10000, color: "#ef4444", name: "HELL" }        
   };
 
-  // State
   const [hasSelectedMode, setHasSelectedMode] = useState(false);
   const [sufferingLevel, setSufferingLevel] = useState("NORMAL");
   const [currentInterval, setCurrentInterval] = useState(45000);
@@ -33,7 +30,7 @@ export default function App() {
   ]);
   
   const [newTitle, setNewTitle] = useState("");
-  const [newPriority, setNewPriority] = useState("MEDIUM");
+  const [newPriority, setNewPriority] = useState("MEDIUM ");
   const [toastMsg, setToastMsg] = useState("");
   const [isPaused, setIsPaused] = useState(false);
   const [showMathPopup, setShowMathPopup] = useState(false);
@@ -47,7 +44,6 @@ export default function App() {
   const intervalRef = useRef(null);
   const mathTimerRef = useRef(null);
 
-  // CAUSTIC SYSTEM COLLAPSE - Enhanced shake + glitch + color chaos
   useEffect(() => {
     if (!gameOver || shakeIntensity === 0) return;
     
@@ -68,9 +64,8 @@ export default function App() {
         setShakeIntensity(0);
         setGlitchEffect(0);
       }
-    }, 33); // ~30fps for dramatic effect
+    }, 33);
   }, [gameOver, shakeIntensity]);
-
   const saveTasks = (newTasks) => {
     localStorage.setItem('chaosTasks', JSON.stringify(newTasks));
     setTasks(newTasks);
@@ -89,8 +84,6 @@ export default function App() {
     setGameOver(false);
     showToast(`${CONFIG[mode].name} ENGAGED`);
   };
-
-  // ADVANCED SURPRISE: Random chaos effects
   const chaosEffects = [
     () => showToast("PRIORITY MATRIX SCRAMBLED"),
     () => showToast("TASK HIERARCHY COLLAPSED"), 
@@ -118,8 +111,6 @@ export default function App() {
       return newTasks;
     });
   };
-
-  // Interval Management
   useEffect(() => {
     if (intervalRef.current) clearInterval(intervalRef.current);
 
@@ -131,8 +122,6 @@ export default function App() {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
   }, [currentInterval, isPaused, gameOver, hasSelectedMode]);
-
-  // HARDER MATH QUESTIONS
   const generateMath = (mode) => {
     let question, correct;
     
@@ -258,7 +247,6 @@ export default function App() {
       background: "#0a0a0a", color: "#e2e8f0",
       fontFamily: "'SF Mono', Monaco, 'Courier New', monospace", 
       fontSize: "14px", overflow: "auto",
-      // Enhanced caustic shake + glitch
       transform: `translate(${shakeIntensity}px, ${shakeIntensity}px) skew(${glitchEffect / 50}deg)`,
       filter: gameOver ? `hue-rotate(${collapseColor}deg) contrast(1.3)` : "none",
       transition: shakeIntensity ? "none" : "transform 0.2s ease"
@@ -270,18 +258,14 @@ export default function App() {
         opacity: gameOver ? 0.2 : 0.5,
         animation: gameOver ? "glitch 0.1s infinite" : "none"
       }}/>
-
-      {/* Header - Clean */}
       <div style={{ padding: "24px 0", borderBottom: "1px solid #334155" }}>
         <div style={{ fontSize: "20px", fontWeight: 600, color: "#f1f5f9" }}>
-          PRIORITY TERMINAL [{sufferingLevel}]
+          PRIORITY TERMINAL [{sufferingLevel }]
         </div>
         <div style={{ fontSize: "12px", color: "#94a3b8", mt: "4px" }}>
           Cycle: {Math.round(currentInterval/1000)}s | {tasks.length}t | {isPaused ? "PAUSED" : gameOver ? "COLLAPSED" : "ACTIVE"}
         </div>
       </div>
-
-      {/* Mode Select - Minimal */}
       {!hasSelectedMode && (
         <div style={{
           position: "fixed", inset: 0, background: "rgba(15,23,42,0.98)", 
@@ -308,8 +292,6 @@ export default function App() {
           </div>
         </div>
       )}
-
-      {/* Control Panel - Minimal */}
       <div style={{
         position: "fixed", top: "120px", right: "24px", width: "260px",
         background: "rgba(15,23,42,0.95)", border: "1px solid #334155", 
@@ -323,18 +305,15 @@ export default function App() {
           }}>
           {isPaused ? "STABLE" : "STOP CYCLE"}
         </button>
-
         <div style={{ color: "#eab308", fontSize: "12px", mb: "8px" }}>MODE</div>
         <select value={sufferingLevel} onChange={(e) => selectMode(e.target.value)} 
           disabled={!hasSelectedMode || gameOver}
           style={{ width: "100%", background: "#0f172a", color: "#e2e8f0", border: "1px solid #334155", padding: "10px", borderRadius: "4px" }}>
-          <option value="NORMAL">NORMAL (45s)</option>
-          <option value="ADVENTURE">ADVENTURE (30s)</option>
-          <option value="HELL">HELL (10s)</option>
+          <option value="NORMAL ">NORMAL (45s)</option>
+          <option value="ADVENTURE ">ADVENTURE (30s)</option>
+          <option value="HELL ">HELL (10s)</option>
         </select>
       </div>
-
-      {/* Task Input & List */}
       <div style={{ maxWidth: "700px", marginRight: "300px", paddingBottom: "100px" }}>
         <form onSubmit={addTask} style={{ mb: "24px" }}>
           <div style={{ display: "flex", gap: "12px" }}>
@@ -352,27 +331,48 @@ export default function App() {
             }}>ADD</button>
           </div>
         </form>
-
-        {visibleTasks.map((task, i) => (
-          <div key={task.id} style={{
-            display: "flex", justifyContent: "space-between", alignItems: "center",
-            padding: "12px 16px", mb: "8px", borderLeft: `4px solid ${getPriorityColor(task.priority)}`,
-            background: "rgba(16,185,129,0.05)", borderRadius: "4px"
-          }}>
-            <div>
-              <span style={{ color: "#94a3b8" }}>[{String(i + 1).padStart(2, '0')}]</span>
-              <span style={{ color: getPriorityColor(task.priority), fontWeight: 600, ml: "12px" }}>{task.priority}</span>
-              <span style={{ color: "#94a3b8", ml: "16px" }}>{task.title}</span>
-            </div>
-            <button onClick={() => saveTasks(tasks.filter(t => t.id !== task.id))} disabled={gameOver}
-              style={{ background: "none", border: "1px solid #64748b", color: "#64748b", padding: "6px 12px", borderRadius: "3px", cursor: "pointer" }}>
-              ✕
-            </button>
-          </div>
-        ))}
+ {visibleTasks.map((task, i) => (
+  <div key={task.id} style={{
+    display: "flex", justifyContent: "space-between", alignItems: "center",
+    padding: "12px 16px", marginBottom: "8px"
+  ,
+    background: "rgba(16,185,129,0.05)", borderRadius: "4px"
+  }}>
+    <div style={{ display: "flex", alignItems: "center", flex: 1 }}>
+      <span style={{ 
+        color: "#94a3b8", 
+        marginRight: "20px", 
+        minWidth: "45px",
+        fontWeight: 500
+      }}>[{String(i + 1).padStart(2, '0')}]</span>
+      <span style={{ 
+        color: getPriorityColor(task.priority), 
+        fontWeight: 700, 
+        marginRight: "32px",
+        minWidth: "70px",
+        textTransform: "uppercase"
+      }}>{task.priority}</span>
+      <span style={{ 
+        color: "#94a3b8", 
+        flex: 1,
+        fontWeight: 400
+      }}>{task.title}</span>
+    </div> 
+    <button onClick={() => saveTasks(tasks.filter(t => t.id !== task.id))} disabled={gameOver}
+      style={{ 
+        background: "none", 
+        border: "1px solid #64748b", 
+        color: "#64748b", 
+        padding: "6px 12px", 
+        borderRadius: "3px", 
+        cursor: "pointer",
+        fontSize: "14px"
+      }}>
+      ✕
+    </button>
+  </div>
+))}
       </div>
-
-      {/* Math Challenge - Minimal */}
       {showMathPopup && mathQuestion && (
         <div style={{
           position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)",
@@ -397,8 +397,6 @@ export default function App() {
           </div>
         </div>
       )}
-
-      {/* Toast - Minimal */}
       {toastMsg && (
         <div style={{
           position: "fixed", top: "24px", right: "24px",
@@ -409,8 +407,6 @@ export default function App() {
           {toastMsg}
         </div>
       )}
-
-      {/* SYSTEM COLLAPSE SCREEN */}
       {gameOver && (
         <div style={{
           position: "fixed", inset: 0, 
@@ -435,7 +431,6 @@ export default function App() {
           </button>
         </div>
       )}
-
       <style jsx>{`
         @keyframes glitch {
           0%, 100% { transform: translate(0); }
@@ -446,8 +441,7 @@ export default function App() {
           50% { transform: translate(-2px, 2px) scale(1.01); }
           60% { transform: translate(2px, -2px) scale(0.99); }
           70% { transform: translate(-1px, 1px) skew(1deg); }
-        }
-        
+        }        
         @keyframes glitch-text {
           0%, 100% { transform: translate(0); }
           10% { transform: translate(-1px, 1px); }
