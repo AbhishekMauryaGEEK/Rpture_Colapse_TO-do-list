@@ -1,9 +1,5 @@
 💥 Rapture Collapse
 Priority Chaos Terminal
-[
-[
-[
-
 A brutal productivity weapon that scrambles your task priorities at random intervals. Survive the chaos or watch your system COLLAPSE. 😈
 
 ✨ Features
@@ -60,7 +56,7 @@ npm run dev
 Open http://localhost:5173
 
 📱 Live Demo
-🔗 Rapture Collapse Live (Deploy your own!)
+🔗 Rapture Collapse Live : https://rapture-collapse.netlify.app/
 
 🛠️ Tech Stack
 text
